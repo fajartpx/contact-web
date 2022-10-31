@@ -5,12 +5,16 @@ import '../App.css'
 
 const Todo =()=> {
     const data = ["fajar", "ika"];
-
     const [todo, setTodo] = useState([...data])
+    const [input,setInput] = useState("")
     
-    const handlerSubmit = (dataBaru)=>{
-        const x= todo.push(dataBaru);
-        setTodo(x)
+    const handlerSubmit = (todox)=>{
+        setTodo([...todo,todox])
+        setInput("")
+    }
+
+    const handlerChange=(event)=>{
+        setInput(event.target.value)
     }
 
    
@@ -19,8 +23,9 @@ const Todo =()=> {
         <h1 style={{textAlign:'center'}}>Call a Friend</h1>
         <hr/>
         <div className="todo-Container">
-            <TodoForm submitHandler={handlerSubmit}/>
-            <TodoList/>   
+            <TodoForm submitHandler={()=>(handlerSubmit(input))} changeHandler={handlerChange} value={input}/>
+            <TodoList list={todo}/> 
+            {console.log(todo)}  
         </div>
         </> )
 }
